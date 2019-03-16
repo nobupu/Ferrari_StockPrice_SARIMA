@@ -1,0 +1,21 @@
+# The CSV file which contains Stock Price of Ferrari lacks of some dates, such as Sat, Sun, National holidays.
+# Need to be covered missing value in date column to plot graph of stock price prediction before loading data.
+# Reference URL:  https://qiita.com/hanon/items/29cf5ed9acb4f731538f
+
+import pandas as pd
+from datetime import date, timedelta
+
+# Loading data in CSV file
+tmp = pd.read_csv("./data/df_FerrariStockPrice.csv", header=0, encoding='utf-8', index_col = 0)
+tmp
+
+# Put date into index
+dates_DF = pd.DataFrame(index=pd.date_range('2018-01-01', '2019-02-26', freq='D'))
+
+# Combine with the each index
+dates_DF2 = tmp.merge(dates_DF, how="outer", left_index=True, right_index=True)
+
+dates_DF2
+
+# Save the data which is fixed into the new CSV file
+dates_DF2.to_csv('data/df_FerrariStockPrice2.csv')
