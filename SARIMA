@@ -7,7 +7,11 @@ from pandas import datetime
 import numpy as np
 
 # Loading CSV file which contains stock price
+# The term of Stock Data is from 2018/01/01 to 2019/02/26.
+# Make up for the missing values in date column in CSV file before loading.
+
 ferrari_stock = pd.read_csv("./data/df_FerrariStockPrice.csv", parse_dates=True, index_col=0)
+
 # Fitting model
 SARIMA_ferrari_stock = sm.tsa.statespace.SARIMAX(ferrari_stock, order=(0, 0, 0),seasonal_order=(0, 1, 1, 12)).fit()
 
