@@ -1,4 +1,4 @@
-# SARIMAで株価予測
+# Predicting the stock price of Ferrari by SARIMA
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -6,15 +6,15 @@ import statsmodels.api as sm
 from pandas import datetime
 import numpy as np
 
-# データの読み込みと整理
-ferrari_stock = pd.read_csv("./data/df_FerrariStockPrice6.csv", parse_dates=True, index_col=0)
-# モデルの当てはめ
+# Loading CSV file which contains stock price
+ferrari_stock = pd.read_csv("./data/df_FerrariStockPrice.csv", parse_dates=True, index_col=0)
+# Fitting model
 SARIMA_ferrari_stock = sm.tsa.statespace.SARIMAX(ferrari_stock, order=(0, 0, 0),seasonal_order=(0, 1, 1, 12)).fit()
 
-# predに予測データを代入する
+# Substitute prediction data into pred 
 pred = SARIMA_ferrari_stock.predict("2019-01-01", "2019-03-31")
 
-# predデータともとの時系列データの可視化
+# Visualization prediction data and time series data
 plt.plot(ferrari_stock, alpha=0.5, color='b', label='true')
 plt.plot(pred, color="r", alpha=0.5, label='prediction')
 plt.title('Ferrari Stock Prediction')
