@@ -1,4 +1,5 @@
 # Predicting the stock price of Ferrari by SARIMA
+# Reference: Aidemy (https://aidemy.net/courses)
 
 import pandas as pd
 import matplotlib.pyplot as plt
